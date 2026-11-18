@@ -1,39 +1,14 @@
-// @flow strict
-
 import { personalData } from "@/utils/data/personal-data";
-import Image from "next/image";
 
-
-function AboutSection() {
-  return (
-    <div id="about" className="my-12 lg:my-16 relative">
-      <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
-        <span className="bg-[var(--title-bg)] w-fit text-[var(--title-text)] rotate-90 p-2 px-5 text-xl rounded-md">
-          ABOUT ME
-        </span>
-        <span className="h-36 w-[2px] bg-[var(--title-bg)]"></span>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-        <div className="order-2 lg:order-1">
-          <p className="font-medium mb-5 text-[var(--logo-text)] text-xl uppercase">
-            Who I am?
-          </p>
-          <p className="text-[var(--text-secondary)] text-sm lg:text-lg">
-            {personalData.description}
-          </p>
-        </div>
-        <div className="flex justify-center order-1 lg:order-2">
-          <Image
-            src={personalData.profile}
-            width={280}
-            height={280}
-            alt="Soham Patel"
-            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
-          />
-        </div>
+export default function AboutSection() {
+  return <section id="about" data-reveal className="section-block about-section">
+    <div className="section-heading"><div><p className="eyebrow">A LITTLE ABOUT ME</p><h2>Curiosity, backed<br className="desktop-break" /> by <span>data.</span></h2></div><span className="section-number">01 — PROFILE</span></div>
+    <div className="about-grid">
+      <p className="about-lead">I turn complex information into clear, useful direction for people and businesses.</p>
+      <div><p className="body-copy">{personalData.description}</p>
+        <div className="about-tags"><span>Media intelligence</span><span>Process optimization</span><span>Predictive analytics</span></div>
       </div>
     </div>
-  );
-};
-
-export default AboutSection;
+    <div className="leadership-strip"><div className="leadership-mark">HG</div><div><strong>Leadership is part of the work.</strong><p>Team coordination, mentoring, stakeholder communication, SOP development and quality assurance.</p></div><span className="leadership-arrow">↗</span></div>
+  </section>;
+}

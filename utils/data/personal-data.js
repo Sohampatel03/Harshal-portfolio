@@ -1,17 +1,8 @@
 export const personalData = {
-  name: "Soham Patel",
-  profile: '/profile.png',
-  designation: "Full Stack Developer",
-  description: "My name is Soham Patel. I am a Full Stack Developer skilled in the MERN stack, AI integrations, and Machine Learning. I love building scalable web applications and exploring new technologies. My core skills include React, Node.js, MongoDB, Flask, FastAPI, and cloud deployments. I am a quick learner with a self-learning attitude, passionate about problem-solving and real-world solutions. I am always open to new work opportunities that align with my skills and interests.",
-  email: 'soham171203@gmail.com',
-  phone: '+918305384160',
-  address: 'Indore, India',
-  github: 'https://github.com/sohampatel03',
-  facebook: 'https://www.facebook.com/share/18sJVgyCcQ/',
-  linkedIn: 'https://linkedin.com/in/sohampatel03',
-  twitter: 'https://x.com/SohamPa66956587',
-  stackOverflow: 'https://www.naukri.com/code360/profile/sohampatel03',
-  leetcode: "https://www.naukri.com/code360/profile/sohampatel03",
-  devUsername: "",
-  resume: "/resume.pdf"
-}
+  name: "Harshal Gunjal",
+  designation: "Data & Business Analyst",
+  description: "Data & Business Analyst with 2 years of professional experience at Onclusive, specializing in SQL, Python, Advanced Excel and Power BI. Experienced in building interactive dashboards, automating data workflows, developing predictive forecasting models and transforming complex datasets into actionable business insights. Skilled in leading teams, optimizing processes and delivering technology-driven business solutions.",
+  email: "harshalgunjal16@gmail.com",
+  phone: "+91-9082621511",
+  linkedIn: "https://linkedin.com/in/harshal-gunjal",
+};

@@ -1,142 +1,33 @@
 "use client";
-// @flow strict
-import { isValidEmail } from "@/utils/check-email";
-import axios from "axios";
+
 import { useState } from "react";
-import { TbMailForward } from "react-icons/tb";
-import { toast } from "react-toastify";
+import { FiArrowUpRight } from "react-icons/fi";
 
-function ContactForm() {
-  const [error, setError] = useState({ email: false, required: false });
-  const [isLoading, setIsLoading] = useState(false);
-  const [userInput, setUserInput] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [honeypot, setHoneypot] = useState("");
+const initial = { name: "", email: "", subject: "", message: "" };
 
-  const checkRequired = () => {
-    if (userInput.email && userInput.message && userInput.name) {
-      setError({ ...error, required: false });
-    }
-  };
-
-  const handleSendMail = async (e) => {
-    e.preventDefault();
-
-    if (!userInput.email || !userInput.message || !userInput.name) {
-      setError({ ...error, required: true });
-      return;
-    } else if (error.email) {
-      return;
-    } else {
-      setError({ ...error, required: false });
-    };
-
+export default function ContactForm() {
+  const [fields, setFields] = useState(initial);
+  const [website, setWebsite] = useState("");
+  const [state, setState] = useState("idle");
+  const [feedback, setFeedback] = useState("");
+  const update = (event) => setFields((current) => ({ ...current, [event.target.name]: event.target.value }));
+  async function submit(event) {
+    event.preventDefault();
+    setState("sending"); setFeedback("");
     try {
-      setIsLoading(true);
-      await axios.post(
-        "/api/contact",
-        { ...userInput, website: honeypot }
-      );
-
-      toast.success("Message sent successfully!");
-      setUserInput({
-        name: "",
-        email: "",
-        message: "",
-      });
+      const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...fields, website }) });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || "Could not send your message.");
+      setState("success"); setFeedback("Thanks for reaching out. Your message has been sent."); setFields(initial);
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong. Please try again.");
-    } finally {
-      setIsLoading(false);
-    };
-  };
-
-  return (
-    <div>
-      <p className="font-medium mb-5 text-[var(--logo-text)] text-xl uppercase">Contact with me</p>
-      <div className="max-w-3xl text-[var(--text-primary)] rounded-lg border border-[var(--border-primary)] p-3 lg:p-5">
-        <p className="text-sm text-[var(--text-secondary)]">{"If you have any questions or concerns, please don't hesitate to contact me. I am open to any work opportunities that align with my skills and interests."}</p>
-        <div className="mt-6 flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Name: </label>
-            <input
-              className="bg-[var(--input-bg)] text-[var(--text-primary)] w-full border rounded-md border-[var(--input-border)] focus:border-[var(--logo-text)] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              type="text"
-              maxLength="100"
-              required={true}
-              onChange={(e) => setUserInput({ ...userInput, name: e.target.value })}
-              onBlur={checkRequired}
-              value={userInput.name}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Email: </label>
-            <input
-              className="bg-[var(--input-bg)] text-[var(--text-primary)] w-full border rounded-md border-[var(--input-border)] focus:border-[var(--logo-text)] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              type="email"
-              maxLength="100"
-              required={true}
-              value={userInput.email}
-              onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
-              onBlur={() => {
-                checkRequired();
-                setError({ ...error, email: !isValidEmail(userInput.email) });
-              }}
-            />
-            {error.email && <p className="text-sm text-red-400">Please provide a valid email!</p>}
-          </div>
-
-          {/* Honeypot field */}
-          <input
-            className="hidden"
-            tabIndex={-1}
-            autoComplete="off"
-            name="website"
-            value={honeypot}
-            onChange={(e) => setHoneypot(e.target.value)}
-          />
-
-          <div className="flex flex-col gap-2">
-            <label className="text-base">Your Message: </label>
-            <textarea
-              className="bg-[var(--input-bg)] text-[var(--text-primary)] w-full border rounded-md border-[var(--input-border)] focus:border-[var(--logo-text)] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              maxLength="500"
-              name="message"
-              required={true}
-              onChange={(e) => setUserInput({ ...userInput, message: e.target.value })}
-              onBlur={checkRequired}
-              rows="4"
-              value={userInput.message}
-            />
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            {error.required && <p className="text-sm text-red-400">
-              All fields are required!
-            </p>}
-            <button
-              className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
-              role="button"
-              onClick={handleSendMail}
-              disabled={isLoading}
-            >
-              {
-                isLoading ?
-                <span>Sending Message...</span>:
-                <span className="flex items-center gap-1">
-                  Send Message
-                  <TbMailForward size={20} />
-                </span>
-              }
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ContactForm;
+      setState("error"); setFeedback(error.message || "Something went wrong. Please try again.");
+    }
+  }
+  return <form className="contact-form" onSubmit={submit}>
+    <div className="form-row"><label>Name<input name="name" value={fields.name} onChange={update} maxLength={100} autoComplete="name" required /></label><label>Email<input type="email" name="email" value={fields.email} onChange={update} maxLength={254} autoComplete="email" required /></label></div>
+    <label>Subject<input name="subject" value={fields.subject} onChange={update} maxLength={150} required /></label>
+    <label>Message<textarea name="message" value={fields.message} onChange={update} maxLength={3000} rows={5} required /></label>
+    <input className="honeypot" name="website" value={website} onChange={(event) => setWebsite(event.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" />
+    <div className="form-submit-row"><button className="button button-primary" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send message"} <FiArrowUpRight /></button><span className={`form-feedback ${state}` } aria-live="polite">{feedback}</span></div>
+  </form>;
+}
