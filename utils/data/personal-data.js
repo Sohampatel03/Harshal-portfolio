@@ -9,4 +9,5 @@ export const personalData = {
   linkedIn: "https://linkedin.com/in/harshal-gunjal",
   github: "https://github.com/Harshal1610",
   resume: "/resume.pdf",
+  photo: "/profile/harshal-gunjal.jpg",
 };

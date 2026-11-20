@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiArrowDownRight, FiArrowUpRight, FiBarChart2, FiDownload } from "react-icons/fi";
 import { personalData } from "@/utils/data/personal-data";
@@ -161,9 +162,10 @@ function HeroTerminal() {
   );
 }
 
-export default function HeroSection() {
+export default function HeroSection({ hasPhoto = false }) {
   const visualRef = useRef(null);
   const [keywordIndex, setKeywordIndex] = useState(0);
+  const showPhoto = Boolean(hasPhoto && personalData.photo);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
@@ -264,10 +266,32 @@ export default function HeroSection() {
         <div className="visual-orbit orbit-one" aria-hidden="true" />
         <div className="visual-orbit orbit-two" aria-hidden="true" />
         <HeroTerminal />
-        <div className="visual-note note-top">
-          <span className="note-dot" aria-hidden="true" />
-          <strong>Onclusive</strong>
-          <small>Management Team Lead</small>
+        <div className={`visual-note note-top${showPhoto ? " note-top-avatar" : ""}`}>
+          {showPhoto ? (
+            <>
+              <div className="note-avatar-wrap">
+                <Image
+                  src={personalData.photo}
+                  alt="Harshal Gunjal"
+                  width={44}
+                  height={44}
+                  priority
+                  sizes="44px"
+                  className="note-avatar"
+                />
+              </div>
+              <div className="note-top-copy">
+                <strong>Onclusive</strong>
+                <small>Management Team Lead</small>
+              </div>
+            </>
+          ) : (
+            <>
+              <span className="note-dot" aria-hidden="true" />
+              <strong>Onclusive</strong>
+              <small>Management Team Lead</small>
+            </>
+          )}
         </div>
         <div className="visual-note note-bottom">
           <span className="note-icon" aria-hidden="true">↗</span>

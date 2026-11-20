@@ -142,16 +142,20 @@ export default function ProjectCard({ project, index }) {
               </div>
             )}
 
-            <div className="project-actions">
-              <a className="project-link" href={project.code} target="_blank" rel="noopener noreferrer">
-                View on GitHub <FiArrowUpRight aria-hidden="true" />
-              </a>
-              {project.demo && (
-                <a className="project-link" href={project.demo} target="_blank" rel="noopener noreferrer">
-                  Live project <FiArrowUpRight aria-hidden="true" />
-                </a>
-              )}
-            </div>
+            {(Boolean(typeof project.code === "string" && project.code.trim()) || Boolean(project.demo)) && (
+              <div className="project-actions">
+                {typeof project.code === "string" && project.code.trim().length > 0 && (
+                  <a className="project-link" href={project.code} target="_blank" rel="noopener noreferrer">
+                    View on GitHub <FiArrowUpRight aria-hidden="true" />
+                  </a>
+                )}
+                {project.demo && (
+                  <a className="project-link" href={project.demo} target="_blank" rel="noopener noreferrer">
+                    Live project <FiArrowUpRight aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </article>
