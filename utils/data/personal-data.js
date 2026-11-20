@@ -1,8 +1,12 @@
 export const personalData = {
   name: "Harshal Gunjal",
-  designation: "Data & Business Analyst",
-  description: "Data & Business Analyst with 2 years of professional experience at Onclusive, specializing in SQL, Python, Advanced Excel and Power BI. Experienced in building interactive dashboards, automating data workflows, developing predictive forecasting models and transforming complex datasets into actionable business insights. Skilled in leading teams, optimizing processes and delivering technology-driven business solutions.",
+  designation: "Data Analyst",
+  tagline: "Python · SQL · Power BI · Automation",
+  description: "Data Analyst with 2+ years at Onclusive and a B.E. in Computer Science Engineering. I work with SQL and Python, build Power BI dashboards and predictive forecasting models, and automate data extraction, cleaning and transformation workflows. Earlier, I worked as a Web Developer intern at VGroomU. Today I lead a team delivering high-precision media intelligence to clients.",
   email: "harshalgunjal16@gmail.com",
   phone: "+91-9082621511",
+  address: "Navi Mumbai, Maharashtra, India",
   linkedIn: "https://linkedin.com/in/harshal-gunjal",
+  github: "https://github.com/Harshal1610",
+  resume: "/resume.pdf",
 };

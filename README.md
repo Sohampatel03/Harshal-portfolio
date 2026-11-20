@@ -1,4 +1,4 @@
-deveefef# Harshal Gunjal — Data & Business Analyst
+# Harshal Gunjal — Data & Business Analyst
 
 A responsive portfolio built with Next.js App Router. The site highlights Harshal's analytics experience, skills, projects, education and contact details.
 
@@ -19,7 +19,7 @@ GMAIL_PASSKEY=
 CLIENT_EMAIL=
 ```
 
-The form sends through Gmail SMTP with Nodemailer. `EMAIL_ADDRESS` and `GMAIL_PASSKEY` authenticate the sender; `CLIENT_EMAIL` receives submissions. The form reports an unavailable state until all three are configured.
+The form sends through Gmail SMTP with Nodemailer. `EMAIL_ADDRESS` and `GMAIL_PASSKEY` authenticate the sender; `CLIENT_EMAIL` receives submissions. The form reports an unavailable state until all three are configured. Set `NEXT_PUBLIC_APP_URL` to the deployed site origin for canonical Open Graph URLs when hosting outside Vercel.
 
 ## Production
 

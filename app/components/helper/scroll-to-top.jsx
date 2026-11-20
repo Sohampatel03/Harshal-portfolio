@@ -1,34 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaArrowUp } from "react-icons/fa6";
+import { FiArrowUp } from "react-icons/fi";
 
-const DEFAULT_BTN_CLS =
-  "fixed bottom-8 right-6 z-50 flex items-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 hover:text-xl transition-all duration-300 ease-out";
-const SCROLL_THRESHOLD = 50;
-
-const ScrollToTop = () => {
+export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > SCROLL_THRESHOLD);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll, { passive: true });
-    };
+    const update = () => setVisible(window.scrollY > 500);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
   }, []);
 
-  if (!visible) return null;
-
-  const onClickBtn = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
-  return (
-    <button className={DEFAULT_BTN_CLS} onClick={onClickBtn} aria-label="Scroll to top">
-      <FaArrowUp />
-    </button>
-  );
-};
-
-export default ScrollToTop;
+  return <button className={`scroll-to-top${visible ? " is-visible" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Scroll to top" tabIndex={visible ? 0 : -1} aria-hidden={!visible}><FiArrowUp /></button>;
+}
