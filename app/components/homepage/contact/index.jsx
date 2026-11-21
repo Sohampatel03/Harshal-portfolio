@@ -48,7 +48,7 @@ export default function ContactSection() {
           </div>
         </div>
 
-        <div data-reveal="right">
+        <div id="contact-form" data-reveal="right">
           <ContactForm />
         </div>
       </div>

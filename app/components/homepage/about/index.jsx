@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FaLinkedinIn } from "react-icons/fa";
 import { personalData } from "@/utils/data/personal-data";
 import { publicFileExists } from "@/utils/public-file";
 import SectionHeading from "../../helper/section-heading";
@@ -39,6 +40,17 @@ export default function AboutSection({ hasPhoto }) {
                   {city}
                 </span>
               )}
+              {typeof personalData.linkedIn === "string" && personalData.linkedIn.trim().length > 0 && (
+                <a
+                  className="portrait-social"
+                  href={personalData.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Harshal Gunjal on LinkedIn"
+                >
+                  <FaLinkedinIn aria-hidden="true" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -55,6 +67,8 @@ export default function AboutSection({ hasPhoto }) {
               <span>B.E. Computer Science Engineering</span>
               <span>SQL</span>
               <span>Python</span>
+              <span>Advanced Excel</span>
+              <span>Tableu</span>
               <span>Power BI</span>
               <span>Automation</span>
             </div>

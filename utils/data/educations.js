@@ -35,7 +35,7 @@ export const certifications = [
     credentialId: "",
     tags: [],
     description: "",
-    url: "",
+    url: "https://www.linkedin.com/learning/certificates/84a55252088682dd0779f370e7cc83b2b929ebc4e8fe138eec8a0d40a60b2746?contentTrackingId=CGHy17P9QYuRdLi0%2Bsk8Og%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text%3ANav%3AIn-Product",
     image: "/certificates/career-essentials-data-analysis-microsoft-linkedin.png",
   },
   {
@@ -46,7 +46,7 @@ export const certifications = [
     credentialId: "",
     tags: [],
     description: "",
-    url: "",
+    url: "https://www.linkedin.com/learning/certificates/fa684692839f7e85f9bed808e201999e19b87e5315df305454a0e79bb87add6b?contentTrackingId=657biIxdRrWeyIXddOKnBQ%3D%3D&viewName=premium-nav-upsell-text&upsellOrderOrigin=Tracking%3Av1%3Apremium_nav_upsell_text%3ANav%3AIn-Product",
     image: "/certificates/intro-career-skills-data-analytics-linkedin.png",
   },
   {
@@ -57,7 +57,7 @@ export const certifications = [
     credentialId: "",
     tags: ["Python", "SQL", "NLP", "ML", "Power BI", "Statistics"],
     description: "Data scientist course - Python, Python libraries, SQL, NLP, ML, Power BI, Statistics",
-    url: "",
+    url: "https://www.linkedin.com/in/harshal-gunjal/overlay/Certifications/1098528209/treasury/?profileId=ACoAAEvjXG0BcouQbB_U8PlPyR42e8Hjiu6HDCg",
     image: "/certificates/data-science-5-minutes-engineering.png",
   },
   {

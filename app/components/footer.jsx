@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FiArrowUpRight } from "react-icons/fi";
 import { personalData } from "@/utils/data/personal-data";
+import StartConversationLink from "./helper/start-conversation-link";
 
 export default function Footer() {
   return (
@@ -14,9 +14,7 @@ export default function Footer() {
             <span>something useful.</span>
           </h2>
         </div>
-        <a className="button button-primary magnetic-button" href={`mailto:${personalData.email}`}>
-          Start a conversation <FiArrowUpRight aria-hidden="true" />
-        </a>
+        <StartConversationLink />
       </div>
 
       <div className="footer-meta">

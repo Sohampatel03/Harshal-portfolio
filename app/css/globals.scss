@@ -1166,6 +1166,31 @@ h2 span {
   color: var(--blue);
 }
 
+.portrait-social {
+  position: absolute;
+  z-index: 4;
+  right: 6%;
+  bottom: 6%;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  min-width: 44px;
+  min-height: 44px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: #0a66c2;
+  color: #ffffff;
+  font-size: 1.15rem;
+  box-shadow: 0 8px 22px rgba(10, 102, 194, 0.45), 0 0 14px rgba(10, 102, 194, 0.25);
+  transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.25, 1), box-shadow 0.22s ease, background-color 0.2s ease;
+}
+
+.portrait-social:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
 .about-copy-col .about-lead {
   max-width: 580px;
   margin-bottom: 18px;
@@ -2008,8 +2033,10 @@ h2 span {
 .certificate-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  height: 100%;
   min-width: 0;
+  border-radius: var(--radius-md);
+  transition: transform 0.24s cubic-bezier(0.2, 0.7, 0.25, 1), box-shadow 0.24s ease;
 }
 
 .certificate-card {
@@ -2027,7 +2054,12 @@ h2 span {
   background: linear-gradient(155deg, rgba(16, 33, 56, 0.84), rgba(10, 22, 37, 0.72));
   box-shadow: var(--inner-highlight);
   text-align: left;
-  transition: transform 0.24s cubic-bezier(0.2, 0.7, 0.25, 1), border-color 0.24s ease, box-shadow 0.24s ease;
+  transition: border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.certificate-card-with-actions {
+  border-bottom: 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 button.certificate-card {
@@ -2143,8 +2175,35 @@ button.certificate-card {
   border-top: 1px solid var(--line);
 }
 
-.certificate-external-bar {
-  padding: 2px 4px;
+.certificate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  padding: 12px 22px;
+  border: 1px solid var(--line);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: rgba(10, 22, 38, 0.88);
+  transition: border-color 0.24s ease;
+}
+
+.certificate-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.certificate-action-btn:hover {
+  color: var(--text);
 }
 
 .credential-link {
@@ -2153,6 +2212,7 @@ button.certificate-card {
   gap: 7px;
   width: fit-content;
   color: var(--cyan);
+  font-family: var(--font-heading), sans-serif;
   font-size: 0.84rem;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -2232,6 +2292,11 @@ button.certificate-card {
 .lightbox-next { right: 12px; }
 
 .lightbox-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
   margin: 16px 0 0;
   color: var(--text-soft);
   font-size: 0.9rem;
@@ -2239,7 +2304,19 @@ button.certificate-card {
   text-align: center;
 }
 
+.lightbox-verify-link {
+  padding: 4px 10px;
+  border: 1px solid rgba(92, 230, 208, 0.3);
+  border-radius: 999px;
+  background: var(--cyan-soft);
+  font-size: 0.8rem;
+}
+
 /* 12 · Contact and footer */
+#contact-form {
+  scroll-margin-top: 6.5rem;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -2589,14 +2666,27 @@ a.contact-direct:hover .contact-arrow {
   .about-portrait:hover .portrait-ring {
     animation-duration: 6s;
   }
+  .portrait-social:hover,
+  .portrait-social:focus-visible {
+    transform: scale(1.08);
+    background: #0c74db;
+    box-shadow: 0 10px 28px rgba(10, 102, 194, 0.65), 0 0 20px rgba(116, 185, 255, 0.36);
+  }
   .leadership-strip:hover,
   .experience-content:hover,
   .skill-group:hover,
-  .education-aside:hover,
-  .certificate-card:hover {
+  .education-aside:hover {
     transform: translateY(-3px);
     border-color: rgba(116, 185, 255, 0.34);
     box-shadow: var(--inner-highlight), 0 16px 38px rgba(0, 0, 0, 0.24);
+  }
+  .certificate-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
+  }
+  .certificate-item:hover .certificate-card,
+  .certificate-item:hover .certificate-actions {
+    border-color: rgba(116, 185, 255, 0.34);
   }
   .project-card:hover {
     transform: perspective(1200px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(-4px);
@@ -2727,6 +2817,10 @@ a.contact-direct:hover .contact-arrow {
     scroll-padding-top: 5rem;
   }
 
+  #contact-form {
+    scroll-margin-top: 5rem;
+  }
+
   .site-shell,
   .site-footer,
   .site-nav-inner {
@@ -2836,6 +2930,14 @@ a.contact-direct:hover .contact-arrow {
     bottom: 8px;
     left: -4px;
   }
+
+  .portrait-social {
+    right: 4%;
+    bottom: 4%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.08rem;
+  }
 }
 
 @media (max-width: 580px) {
@@ -2843,6 +2945,10 @@ a.contact-direct:hover .contact-arrow {
     --type-display: clamp(2.85rem, 13vw, 4rem);
     --type-section: clamp(1.85rem, 8vw, 2.4rem);
     scroll-padding-top: 4.5rem;
+  }
+
+  #contact-form {
+    scroll-margin-top: 4.5rem;
   }
 
   .site-shell,
@@ -3046,6 +3152,11 @@ a.contact-direct:hover .contact-arrow {
     transform: none;
   }
 
+  .lightbox-caption {
+    padding: 0 50px;
+    font-size: 0.82rem;
+  }
+
   .contact-direct {
     grid-template-columns: 74px minmax(0, 1fr) auto;
     gap: 10px;
@@ -3106,7 +3217,10 @@ a.contact-direct:hover .contact-arrow {
     animation: none !important;
   }
   .about-portrait,
-  .about-portrait:hover {
+  .about-portrait:hover,
+  .portrait-social,
+  .portrait-social:hover,
+  .portrait-social:focus-visible {
     transform: none !important;
   }
 }

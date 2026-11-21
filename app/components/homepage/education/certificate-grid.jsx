@@ -123,17 +123,41 @@ export default function CertificateGrid({ certificates }) {
           return (
             <article className="certificate-item" data-reveal="scale" key={certificate.id}>
               {certificate.hasImage ? (
-                <button
-                  className="certificate-card"
-                  type="button"
-                  onClick={(event) => {
-                    returnFocusRef.current = event.currentTarget;
-                    setActive(imageIndex);
-                  }}
-                  aria-label={`View certificate: ${certificate.title}`}
-                >
-                  {content}
-                </button>
+                <>
+                  <button
+                    className="certificate-card certificate-card-with-actions"
+                    type="button"
+                    onClick={(event) => {
+                      returnFocusRef.current = event.currentTarget;
+                      setActive(imageIndex);
+                    }}
+                    aria-label={`View certificate: ${certificate.title}`}
+                  >
+                    {content}
+                  </button>
+                  <div className="certificate-actions">
+                    <button
+                      type="button"
+                      className="certificate-action-btn"
+                      onClick={(event) => {
+                        returnFocusRef.current = event.currentTarget;
+                        setActive(imageIndex);
+                      }}
+                    >
+                      View certificate <FiMaximize2 aria-hidden="true" />
+                    </button>
+                    {certificate.url && (
+                      <a
+                        className="credential-link"
+                        href={certificate.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Verify credential <FiExternalLink aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                </>
               ) : (
                 <div className="certificate-card certificate-card-static">
                   {content}
@@ -149,19 +173,6 @@ export default function CertificateGrid({ certificates }) {
                       </a>
                     </div>
                   )}
-                </div>
-              )}
-
-              {certificate.hasImage && certificate.url && (
-                <div className="certificate-external-bar">
-                  <a
-                    className="credential-link"
-                    href={certificate.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View verified credential <FiExternalLink aria-hidden="true" />
-                  </a>
                 </div>
               )}
             </article>
@@ -218,7 +229,19 @@ export default function CertificateGrid({ certificates }) {
                 <FiArrowRight />
               </button>
             )}
-            <p className="lightbox-caption">{caption(current)}</p>
+            <div className="lightbox-caption">
+              <span>{caption(current)}</span>
+              {current.url && (
+                <a
+                  className="credential-link lightbox-verify-link"
+                  href={current.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Verify credential <FiExternalLink aria-hidden="true" />
+                </a>
+              )}
+            </div>
           </div>
         </div>,
         document.body
