@@ -29,7 +29,7 @@ export default function Footer() {
           Harshal Gunjal <span>·</span> {personalData.designation}
         </p>
         <div className="footer-links">
-          <a href={`mailto:${personalData.email}`}>Email</a>
+          <a href={`mailto:${personalData.email}`}>Email ↗</a>
           <a href={personalData.linkedIn} target="_blank" rel="noopener noreferrer">
             LinkedIn ↗
           </a>
